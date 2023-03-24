@@ -1,6 +1,6 @@
 import app from './index'
 
-const port = 4000
-app.listen(4000, ()=>{
+const port = process.env.PORT ;
+app.listen(port, ()=>{
   console.log(`server listening on port ${port}`)
-})
+}) 
