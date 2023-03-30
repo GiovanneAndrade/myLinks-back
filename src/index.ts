@@ -1,16 +1,29 @@
-import  express  from "express";
-import dotenv from 'dotenv';
-import userRouter from './routers/user.router'
+/// <reference path="./express.d.ts" />
+
+import dotenv from "dotenv";
+import router from "./routers/index";
+import express, { Request, Response } from "express";
+import { PrismaClient } from "@prisma/client";
+
+import bodyParser from "body-parser";
 
 const app = express();
 app.use(express.json());
 dotenv.config();
 
-app.use(userRouter)
+dotenv.config();
 
 
 
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
-export default app
 
+app.use(router)
+ 
+
+
+ 
+ 
+export default app;
  
