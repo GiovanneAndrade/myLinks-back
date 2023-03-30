@@ -1,11 +1,11 @@
 import { Router } from "express"
-import { getUserController } from "../controllers/user.controller"
+import { signinController, signupController} from "../controllers/user.controller"
+import { verifyToken } from "../middlewares/authentication"
  
 
 
 const router = Router()
-
-router.get('/user', getUserController)
-
-
+   
+router.post('/signin', signinController)
+router.post('/signup', signupController)
 export default router
