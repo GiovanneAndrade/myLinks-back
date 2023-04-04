@@ -1,10 +1,15 @@
 import { Router } from "express";
-import { linkController } from "../controllers/link.controller";
+import {
+  createLinkController,
+  linkController,
+} from "../controllers/link.controller";
 
 import { verifyToken } from "../middlewares/authentication";
 
-const router = Router();
+const linkRouter = Router();
 
-router.get("/link",verifyToken, linkController);
-
-export default router;
+linkRouter
+  .all("/*", verifyToken)
+  .get("/link", linkController)
+  .post("/link", createLinkController);
+export default linkRouter;
