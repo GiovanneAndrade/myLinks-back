@@ -17,6 +17,7 @@ model User {
   name      String?
   Session   Session[]
   Link      Link[]
+  List      List[]
   createdAt DateTime  @default(now())
 
   @@map("user")
@@ -33,11 +34,37 @@ model Session {
 }
 
 model Link {
+  id            Int          @id @default(autoincrement())
+  link          String
+  user          User         @relation(fields: [userId], references: [id])
+  userId        Int
+  createdAt     DateTime     @default(now())
+  metaFetcher   MetaFetcher? @relation(fields: [metaFetcherId], references: [id])
+  list          List[]
+  metaFetcherId Int          @unique
+
+  @@map("link")
+}
+
+model MetaFetcher {
+  id          Int      @id @default(autoincrement())
+  website     String
+  title       String?
+  banner      String?
+  description String?
+  link        Link?
+  createdAt   DateTime @default(now())
+
+  @@map("metaFetcher")
+}
+
+model List {
   id        Int      @id @default(autoincrement())
-  link      String
+  name      String
+  link      Link[]
   user      User     @relation(fields: [userId], references: [id])
   userId    Int
   createdAt DateTime @default(now())
 
-  @@map("link")
+  @@map("list")
 }
