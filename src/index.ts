@@ -2,6 +2,7 @@
 
 import dotenv from "dotenv";
 import router from "./routers/index";
+import cors from "cors";
 import express, { Request, Response } from "express";
 import { PrismaClient } from "@prisma/client";
 
@@ -12,18 +13,10 @@ app.use(express.json());
 dotenv.config();
 
 dotenv.config();
-
-
-
+app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+app.use(router);
 
-app.use(router)
- 
-
-
- 
- 
 export default app;
- 
