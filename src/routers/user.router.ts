@@ -1,11 +1,11 @@
-import { Router } from "express"
-import { signinController, signupController} from "../controllers/user.controller"
-import { verifyToken } from "../middlewares/authentication"
- 
+import { Router } from "express";
+import {
+  signinController,
+  signupController,
+} from "../controllers/user.controller";
 
-
-const router = Router()
-   
-router.post('/signin', signinController)
-router.post('/signup', signupController)
-export default router
+const userRouter = Router();
+userRouter
+  .post("/signin", signinController)
+  .post("/signup", signupController);
+export default userRouter;
