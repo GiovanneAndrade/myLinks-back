@@ -14,9 +14,20 @@ async function createCategoryRepository(name: string, userId:string,linkId:any) 
   return result;
 }
 
-async function consultCategoryRepository() {
+async function consultCategoryRepository(userId:string) {
   const result = await prisma.list.findMany({
-    where: { userId: 1 },
+    where: { userId: Number(userId) },
+ 
+    select:{
+     id:true,
+     userId:true,
+      name:true,
+      link:{
+        select:{
+          metaFetcher:true
+        }
+      }
+    }
   });
 
   return result;
