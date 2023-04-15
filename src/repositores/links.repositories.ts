@@ -1,17 +1,48 @@
 import prisma from "../database/db";
+import { MetaDados } from "../protocols";
 
-async function linkRepository() {
+async function linkRepository(userId:string) {
+  
   const result = await prisma.link.findMany({
-    select: {
-      metaFetcher: true,
+    where:{
+      userId:Number(userId)
     },
+    select: {
+      metaFetcher: {
+        select:{
+          id:true,
+          banner:true,
+          description:true,
+          createdAt:true,
+           website:true,
+           title:true,
+           link:{
+            select:{
+              list:true
+            }
+           }
+        }
+      }
+    },
+   
   });
-
   return result;
 }
 
-async function createLinkRepository(metadata: any, userId: string) {
-  console.log(metadata.title)
+async function linkCountRepository(userId:string) {
+  
+  const count = await prisma.link.count({
+    where:{
+      userId:1
+    }
+  })
+      
+   
+ 
+  return count;
+}
+
+async function createLinkRepository(metadata: any, userId: string): Promise<MetaDados> {
   const result = await prisma.metaFetcher.create({
     data: {
       website: metadata.website,
@@ -33,4 +64,18 @@ async function createLinkRepository(metadata: any, userId: string) {
 
   return result;
 }
-export { linkRepository, createLinkRepository };
+
+async function deleteLinkRepository(linkId:number) {
+  const deleteLink = await prisma.link.delete({
+    where:{
+        id:Number(linkId)
+    }
+  });
+  const deleteMetaFetcher = await prisma.metaFetcher.delete({
+    where:{
+        id: deleteLink.metaFetcherId
+    }
+  });
+  return 'deleted';
+}
+export { linkRepository, createLinkRepository, deleteLinkRepository };
