@@ -8,7 +8,7 @@ async function consultCategoryController(req: Request, res: Response) {
   const userId = req.user.userId;
 
   try {
-    const result = await allCategories.consultCategoryService();
+    const result = await allCategories.consultCategoryService(userId);
     return res.send(result);
   } catch (error: any) {
     return InternalServerError(res);
@@ -18,6 +18,7 @@ async function consultCategoryController(req: Request, res: Response) {
 async function createCategoryController(req: Request, res: Response) {
   const userId = req.user.userId;
   const { name, linkId } = req.body;
+  
   try {
     const result = await allCategories.createCategoryService(
       name,
@@ -35,7 +36,7 @@ async function updateCategoryController(req: Request, res: Response) {
   const { linkId, listId } = req.body;
 
   try {
-    const result = await allCategories.updateCategoryService(listId, linkId);
+    const result = await allCategories.updateCategoryService(listId, linkId, userId);
     return res.send(result);
   } catch (error: any) {
     return InternalServerError(res);
@@ -48,7 +49,8 @@ async function removeLinkToCategoryController(req: Request, res: Response) {
   try {
     const result = await allCategories.removeLinkToCategoryService(
       listId,
-      linkId
+      linkId,
+      userId
     );
     return res.send(result);
   } catch (error: any) {
