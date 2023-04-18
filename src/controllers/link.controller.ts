@@ -42,4 +42,15 @@ async function deleteLinkController(req: Request, res: Response) {
     return InternalServerError(res);
   }
 }
-export { linkController, createLinkController, deleteLinkController };
+async function updateLinkController(req: Request, res: Response) {
+  const userId = req.user.userId;
+   const editMetaDados = req.body
+
+  try {
+    const result = await allUser.updateLinkService(userId, editMetaDados);
+    return res.send(result);
+  } catch (error: any) {
+    return InternalServerError(res);
+  }
+}
+export { linkController, createLinkController, deleteLinkController, updateLinkController };
