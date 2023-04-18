@@ -1,48 +1,46 @@
 import prisma from "../database/db";
 import { MetaDados } from "../protocols";
 
-async function linkRepository(userId:string) {
-  
+async function linkRepository(userId: string) {
   const result = await prisma.link.findMany({
-    where:{
-      userId:Number(userId)
+    where: {
+      userId: Number(userId),
     },
     select: {
       metaFetcher: {
-        select:{
-          id:true,
-          banner:true,
-          description:true,
-          createdAt:true,
-           website:true,
-           title:true,
-           link:{
-            select:{
-              list:true
-            }
-           }
-        }
-      }
+        select: {
+          id: true,
+          banner: true,
+          description: true,
+          createdAt: true,
+          website: true,
+          title: true,
+          link: {
+            select: {
+              list: true,
+            },
+          },
+        },
+      },
     },
-   
   });
   return result;
 }
 
-async function linkCountRepository(userId:string) {
-  
+async function linkCountRepository(userId: string) {
   const count = await prisma.link.count({
-    where:{
-      userId:1
-    }
-  })
-      
-   
- 
+    where: {
+      userId: 1,
+    },
+  });
+
   return count;
 }
 
-async function createLinkRepository(metadata: any, userId: string): Promise<MetaDados> {
+async function createLinkRepository(
+  metadata: any,
+  userId: string
+): Promise<MetaDados> {
   const result = await prisma.metaFetcher.create({
     data: {
       website: metadata.website,
@@ -65,17 +63,63 @@ async function createLinkRepository(metadata: any, userId: string): Promise<Meta
   return result;
 }
 
-async function deleteLinkRepository(linkId:number) {
+async function deleteLinkRepository(linkId: number) {
   const deleteLink = await prisma.link.delete({
-    where:{
-        id:Number(linkId)
-    }
+    where: {
+      id: Number(linkId),
+    },
   });
   const deleteMetaFetcher = await prisma.metaFetcher.delete({
-    where:{
-        id: deleteLink.metaFetcherId
-    }
+    where: {
+      id: deleteLink.metaFetcherId,
+    },
   });
-  return 'deleted';
+  return "deleted";
 }
-export { linkRepository, createLinkRepository, deleteLinkRepository };
+
+async function updateLinkRepository(userId: string, editMetaDados: any) {
+  const linkOriginale = await prisma.link.findUnique({
+    where: {
+      id: Number(editMetaDados.linkId),
+    },
+    select: {
+      metaFetcher: {
+        select: {
+          title: true,
+          description: true,
+        },
+      },
+    },
+  });
+
+  const updateLink = await prisma.link.update({
+    where: {
+      id: Number(editMetaDados.linkId),
+    },
+    data: {
+      metaFetcher: {
+        update: {
+          title:
+            editMetaDados.title === ""
+              ? linkOriginale.metaFetcher.title
+              : editMetaDados.title,
+          description:
+            editMetaDados.description === ""
+              ? linkOriginale.metaFetcher.description
+              : editMetaDados.description,
+        },
+      },
+      list: {
+        connect: editMetaDados.list,
+      },
+    },
+  });
+  
+  return updateLink;
+}
+export {
+  linkRepository,
+  createLinkRepository,
+  deleteLinkRepository,
+  updateLinkRepository,
+};
