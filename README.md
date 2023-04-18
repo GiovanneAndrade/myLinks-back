@@ -1,6 +1,6 @@
 # E-commerce com carrinho de compras, login, cadastro, página de favoritos e do usuário
 
-Este é um aplicativo full-stack de comércio eletrônico com recursos de carrinho de compras, login, cadastro, página de favoritos e do usuário. O backend foi construído com Node.js e TypeScript, e usa o Prisma como ORM para gerenciar o banco de dados.
+Este é um aplicativo completo que gerencia links salvos pelos usuários. O backend foi desenvolvido utilizando as tecnologias Node.js e TypeScript, com o Prisma sendo utilizado como ORM para gerenciar as interações com o banco de dados.
 
 ## 🚀 Começando
 
@@ -11,14 +11,12 @@ Essas instruções permitirão que você obtenha uma cópia do projeto em opera�
 De que coisas você precisa para instalar o software e como instalá-lo?
 
 ```
-Para usar o aplicativo, é necessário ter o Node.js instalado. Clone o repositório e instale as dependências com o seguinte comando
+Para utilizar o aplicativo, é necessário ter o Node.js e o PostgreSQL instalados em sua máquina. Clone o repositório e instale as dependências executando o seguinte comando:
 ```
 
 ### 🔧 Instalação
 
-Uma série de exemplos passo-a-passo que informam o que você deve executar para ter um ambiente de desenvolvimento em execução.
-
-Diga como essa etapa será:
+A seguir, você encontrará um guia passo a passo para configurar um ambiente de desenvolvimento em sua máquina.
 
 ```
 npm install
@@ -110,7 +108,9 @@ put `/category/link`
 
 ## ⚙️ Executando os testes
 
-Para executar os testes, use o seguinte comando:
+Para executar os testes, é necessário ter um arquivo .env_test configurado com uma variável DATABASE_URL apontando para o banco de dados de teste. Certifique-se de que o banco de dados de teste esteja configurado corretamente antes de prosseguir.
+
+Em seguida, execute o seguinte comando no terminal:
 
 ```
 npm run test
