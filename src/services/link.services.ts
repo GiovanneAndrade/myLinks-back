@@ -29,5 +29,8 @@ async function deleteLinkService(links: Links[]): Promise<string> {
 
   return "ok";
 }
-
-export { linkService, createLinkService, deleteLinkService };
+async function updateLinkService(userId: string, editMetaDados: any) {
+ 
+  return await allLinks.updateLinkRepository(userId, editMetaDados);
+}
+export { linkService, createLinkService, deleteLinkService, updateLinkService };
