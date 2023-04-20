@@ -21,9 +21,10 @@ async function linkController(req: Request, res: Response) {
 async function createLinkController(req: Request, res: Response): Promise<Response<MetaDados>>  {
   const userId = req.user.userId;
   const link = req.body.link as string;
+  const listId = req.body.listId as any;
   
   try {
-    const result = await allUser.createLinkService(link, userId);
+    const result = await allUser.createLinkService(link, userId,listId);
    
     return res.send(result);
   } catch (error) {
