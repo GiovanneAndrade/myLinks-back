@@ -36,6 +36,15 @@ async function linkCountRepository(userId: string) {
 
   return count;
 }
+async function consultLinkToMeta(metaFetcherId: number) {
+  const consult = await prisma.link.findMany({
+    where: {
+       metaFetcherId:Number(metaFetcherId)
+    },
+  });
+
+  return consult;
+}
 
 async function createLinkRepository(
   metadata: any,
@@ -59,7 +68,7 @@ async function createLinkRepository(
       },
     },
   });
-
+ 
   return result;
 }
 
@@ -87,6 +96,10 @@ async function updateLinkRepository(userId: string, editMetaDados: any) {
         select: {
           title: true,
           description: true,
+          banner:true,
+          id:true,
+          website:true,
+          link:true
         },
       },
     },
@@ -115,11 +128,28 @@ async function updateLinkRepository(userId: string, editMetaDados: any) {
     },
   });
   
-  return updateLink;
+  return await prisma.link.findUnique({
+    where: {
+      id: Number(editMetaDados.linkId),
+    },
+    select: {
+      metaFetcher: {
+        select: {
+          title: true,
+          description: true,
+          banner:true,
+          id:true,
+          website:true,
+          link:true
+        },
+      },
+    },
+  });;
 }
 export {
   linkRepository,
   createLinkRepository,
   deleteLinkRepository,
   updateLinkRepository,
+  consultLinkToMeta
 };
