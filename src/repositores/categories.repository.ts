@@ -27,16 +27,18 @@ async function consultCategoryRepository(userId:string) {
           metaFetcher:true
         }
       }
-    }
+    },
+    orderBy: { id: 'desc' }
   });
 
   return result;
 }
 
-async function updateCategoryRepository(listsId: any, linkId: any) {
+async function updateCategoryRepository(listId: any, linkId: any) {
+
   const result = await prisma.list.update({
     where: {
-      id: listsId,
+      id: listId,
     },
     data: {
       link: {
