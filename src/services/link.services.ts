@@ -12,15 +12,18 @@ async function linkService(userId: string) {
   return links;
 }
 
-async function createLinkService(
-  link: string,
-  userId: string
-): Promise<MetaDados> {
+async function createLinkService( link: string,  userId: string, listId:any): Promise<MetaDados> {
   const linkMetaDados = (await metaFetcher(link)) as PageData;
   const { metadata } = linkMetaDados as PageData;
   const result = await allLinks.createLinkRepository(metadata, userId);
 
-  return result;
+  if(listId){
+    const consultLink = await allLinks.consultLinkToMeta(result.id);
+    const linkToList = await allLinks.updateCategoryRepository(listId, [{ id: consultLink[0].id }]);
+  }
+
+
+  return result;  
 }
 async function deleteLinkService(links: Links[]): Promise<string> {
   for (let i = 0; i < links.length; i++) {
