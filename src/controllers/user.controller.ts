@@ -13,7 +13,9 @@ async function signinController(req: Request, res: Response) {
   //const userId = req.user.userId;
 
   try {
+    
     const result = await allUser.signinService(email, password);
+    
     return res.json( result );
   } catch (error: any) {
     if (error.statusCode === 404) return ifNotFoundError(res, error);

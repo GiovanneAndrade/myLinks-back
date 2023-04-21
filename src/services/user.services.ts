@@ -6,9 +6,11 @@ import jwt from "jsonwebtoken";
 
 const secretKey = process.env.SECRET_KEY;
 async function signinService(email: string, password: string) {
+ 
   const user = await allUsers.getUserRepository(email);
-  if (!user) throw new NotFoundError("Usurario não Cadastrado");
 
+  if (!user) throw new NotFoundError("Usurario não Cadastrado");
+ 
   if (!bcrypt.compareSync(password, user.password))
     throw new NotFoundError("Senha incorreta.");
 
