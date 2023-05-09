@@ -1,4 +1,4 @@
-# E-commerce com carrinho de compras, login, cadastro, página de favoritos e do usuário
+# Aplicativo Web fullstack que permite aos usuários salvar e gerenciar seus links favoritos de forma intuitiva e elegante.
 
 Este é um aplicativo completo que gerencia links salvos pelos usuários. O backend foi desenvolvido utilizando as tecnologias Node.js e TypeScript, com o Prisma sendo utilizado como ORM para gerenciar as interações com o banco de dados.
 
