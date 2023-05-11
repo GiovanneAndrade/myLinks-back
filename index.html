@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Redoc</title>
+  <!-- needed for adaptive design -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,700|Roboto:300,400,700" rel="stylesheet">
+
+  <!--
+    Redoc doesn't change outer page styles
+    -->
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <redoc spec-url='http://localhost:5000/swagger/'></redoc>
+  <script src="https://cdn.redoc.ly/redoc/latest/bundles/redoc.standalone.js"> </script>
+  <style>
+    /* altera a cor do fundo do redoc */
+    .redoc-container {
+      background-color: #1d1b1b;
+    }
+
+    /* altera a cor da fonte do redoc */
+    .redoc-container,
+    .redoc-container p,
+    .redoc-container h1,
+    .redoc-container h2,
+    .redoc-container h3,
+    .redoc-container h4,
+    .redoc-container h5,
+    .redoc-container h6 {
+      color: #333;
+    }
+  </style>
+</body>
+
+</html>

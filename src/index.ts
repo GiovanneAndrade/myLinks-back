@@ -4,13 +4,16 @@ import dotenv from "dotenv";
 import router from "./routers/index";
 import cors from "cors";
 import express, { Request, Response } from "express";
-import { PrismaClient } from "@prisma/client";
-
+import swaggerUi from "swagger-ui-express";
+import swaggerDocument from "../swagger.json";
 import bodyParser from "body-parser";
 
 const app = express();
 app.use(express.json());
 dotenv.config();
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+ 
+
 
 dotenv.config();
 app.use(cors());
