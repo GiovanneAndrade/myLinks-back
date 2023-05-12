@@ -18,16 +18,21 @@ async function consultCategoryController(req: Request, res: Response) {
 async function createCategoryController(req: Request, res: Response) {
   const userId = req.user.userId;
   const { name, linkId } = req.body;
-  
+
   try {
     const result = await allCategories.createCategoryService(
       name,
       userId,
       linkId
     );
+   
     return res.send(result);
   } catch (error: any) {
-    return InternalServerError(res);
+    if (error.message === "Link não existe") {
+      return res.status(404).json({ error: "Link não existe", message: "O link fornecido não existe." });
+    } else {
+      return InternalServerError(res);
+    }
   }
 }
 
