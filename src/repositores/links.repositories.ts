@@ -1,5 +1,5 @@
-import prisma from "../database/db";
-import { MetaDados } from "../protocols";
+import prisma from "@/database/db";
+import { MetaDados } from "@/protocols";
 
 async function linkRepository(userId: string) {
   const result = await prisma.link.findMany({

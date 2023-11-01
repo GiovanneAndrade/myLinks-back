@@ -1,12 +1,12 @@
 import { Router } from "express";
-import { verifyToken } from "../middlewares/authentication";
+import { verifyToken } from "@/middlewares/authentication";
 import {
   consultCategoryController,
   createCategoryController,
   deleteCategoryController,
   removeLinkToCategoryController,
   updateCategoryController,
-} from "../controllers";
+} from "@/controllers";
 
 const categoryRouter = Router();
 categoryRouter

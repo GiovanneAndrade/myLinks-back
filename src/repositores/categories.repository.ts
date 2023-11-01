@@ -1,4 +1,4 @@
-import prisma from "../database/db";
+import prisma from "@/database/db";
 
 async function createCategoryRepository(name: string, userId:string,linkId:any) {
   const result = await prisma.list.create({

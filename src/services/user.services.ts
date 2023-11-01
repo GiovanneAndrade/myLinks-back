@@ -1,6 +1,5 @@
-import { conflictError, NotFoundError } from "../erros/erros";
-import { Token, User } from "../protocols";
-import * as allUsers from "../repositores";
+import { NotFoundError } from "@/erros/erros";
+import * as allUsers from "@/repositores";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 

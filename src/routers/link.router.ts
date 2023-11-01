@@ -4,9 +4,9 @@ import {
   deleteLinkController,
   linkController,
   updateLinkController,
-} from "../controllers/link.controller";
+} from "@/controllers";
 
-import { verifyToken } from "../middlewares/authentication";
+import { verifyToken } from "@/middlewares/authentication";
 
 const linkRouter = Router();
 

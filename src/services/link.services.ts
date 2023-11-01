@@ -1,9 +1,6 @@
-import { conflictError, NotFoundError } from "../erros/erros";
-import * as allLinks from "../repositores";
-import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
+import * as allLinks from "@/repositores";
 import metaFetcher from "meta-fetcher";
-import { Link, Links, MetaDados, PageData } from "../protocols";
+import { Link, Links, MetaDados, PageData } from "@/protocols";
 
 async function linkService(userId: string) {
   const result = await allLinks.linkRepository(userId);
