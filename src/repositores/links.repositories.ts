@@ -23,6 +23,11 @@ async function linkRepository(userId: string) {
         },
       },
     },
+    orderBy: {
+      metaFetcher: {
+        createdAt: 'desc',  
+      },
+    },
   });
   return result;
 }
