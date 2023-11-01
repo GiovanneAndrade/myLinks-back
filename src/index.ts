@@ -1,11 +1,9 @@
 /// <reference path="./express.d.ts" />
 
 import dotenv from "dotenv";
-import router from "./routers/index";
+import router from "@/routers/index";
 import cors from "cors";
-import express, { Request, Response } from "express";
-import { PrismaClient } from "@prisma/client";
-
+import express from "express";
 import bodyParser from "body-parser";
 
 const app = express();
