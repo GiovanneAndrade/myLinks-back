@@ -1,7 +1,7 @@
 /// <reference path="./express.d.ts" />
 
 import dotenv from "dotenv";
-import router from "./routers/index";
+import router from "@/routers/index";
 import cors from "cors";
 import express, { Request, Response } from "express";
 import swaggerUi from "swagger-ui-express";

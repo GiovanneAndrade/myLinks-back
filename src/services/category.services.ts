@@ -1,27 +1,23 @@
-import { conflictError, NotFoundError } from "../erros/erros";
-import * as allCategories from "../repositores";
-import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
-import metaFetcher from "meta-fetcher";
+import * as allCategories from "@/repositores";
 
 async function consultCategoryService(userId: string) {
-  const catetogy = await allCategories.consultCategoryRepository(userId);
-  const newData = catetogy.map((obj) => {
-    return {
-      id: obj.id,
-      name: obj.name,
-      links: obj.link.map((linkObj) => linkObj.metaFetcher),
-    };
-  });
-  const allLinks = (await allCategories.linkRepository(userId)) as any;
+    const catetogy = await allCategories.consultCategoryRepository(userId);
+    const newData = catetogy.map((obj) => {
+        return {
+            id: obj.id,
+            name: obj.name,
+            links: obj.link.map((linkObj) => linkObj.metaFetcher),
+        };
+    });
+    const allLinks = (await allCategories.linkRepository(userId)) as any;
 
-  newData.push({
-    id: 0,
-    name: "all categories",
-    links:allLinks.map((linkObj:any) => linkObj.metaFetcher),
-  });
+    newData.push({
+        id: 0,
+        name: "all categories",
+        links: allLinks.map((linkObj: any) => linkObj.metaFetcher),
+    });
 
-  return newData;
+    return newData;
 }
 
 async function createCategoryService( name: string, userId: string, linkId: any) {
@@ -49,33 +45,33 @@ async function updateCategoryService(listsId: any, linkId: any, userId: string) 
     );
   }
 
-  return await allCategories.consultCategoryRepository(userId);
+    return await allCategories.consultCategoryRepository(userId);
 }
 
 async function removeLinkToCategoryService(
-  listsId: any,
-  linkId: any,
-  userId: string
+    listsId: any,
+    linkId: any,
+    userId: string
 ) {
-  for (let i = 0; i < listsId.length; i++) {
-    const catetogy = await allCategories.removeLinkToCategoryRepository(
-      listsId[i].listId,
-      linkId
-    );
-  }
+    for (let i = 0; i < listsId.length; i++) {
+        const catetogy = await allCategories.removeLinkToCategoryRepository(
+            listsId[i].listId,
+            linkId
+        );
+    }
 
-  return await allCategories.consultCategoryRepository(userId);
+    return await allCategories.consultCategoryRepository(userId);
 }
 
 async function deleteCategoryService(listsId: string) {
-  const catetogy = await allCategories.deleteCategoryRepository(listsId);
+    const catetogy = await allCategories.deleteCategoryRepository(listsId);
 
-  return catetogy;
+    return catetogy;
 }
 export {
-  createCategoryService,
-  updateCategoryService,
-  removeLinkToCategoryService,
-  consultCategoryService,
-  deleteCategoryService,
+    createCategoryService,
+    updateCategoryService,
+    removeLinkToCategoryService,
+    consultCategoryService,
+    deleteCategoryService,
 };

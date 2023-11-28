@@ -1,4 +1,4 @@
-{
+/* {
   "compilerOptions": {
     "outDir": "dist",
     "esModuleInterop": true,
@@ -9,4 +9,27 @@
   "ts-node" : {
     "esm": true
   }
+} */
+{
+  "compilerOptions": {
+      "outDir": "dist",
+      "esModuleInterop": true,
+      "module": "CommonJS",
+      "moduleResolution": "Node",
+      "rootDirs": ["src"],
+      "baseUrl": ".",
+      "paths": {
+          "@/*": ["src/*"]
+      },
+      "plugins": [
+          {
+              "transform": "typescript-transform-paths"
+          }
+      ]
+  },
+  "ts-node": {
+      "transpileOnly": true,
+      "require": ["typescript-transform-paths/register"]
+  },
+  "include": ["src"]
 }

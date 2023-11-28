@@ -1,5 +1,5 @@
-import prisma from "../database/db";
-import { User } from "../protocols";
+import prisma from "@/database/db";
+import { User } from "@/protocols";
 
 async function getUserRepository(email:string){
   const result = await prisma.user.findUnique({ where: { email: email } });
