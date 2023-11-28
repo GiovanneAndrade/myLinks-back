@@ -22,15 +22,20 @@ async function createLinkController(req: Request, res: Response): Promise<Respon
   const userId = req.user.userId;
   const link = req.body.link as string;
   const listId = req.body.listId as any;
-  
-  try {
-    const result = await allUser.createLinkService(link, userId,listId);
+
+  try { 
+    const result = await allUser.createLinkService(link, userId, listId);
    
     return res.send(result);
   } catch (error) {
-    return InternalServerError(res);
+    if (error.message === "Link inválido") {
+      return res.status(400).json({ error: "Link inválido", message: "O link fornecido não é válido." });
+    } else {
+      return InternalServerError(res);
+    }
   }
 }
+
 
 async function deleteLinkController(req: Request, res: Response) {
   const userId = req.user.userId;
@@ -40,7 +45,11 @@ async function deleteLinkController(req: Request, res: Response) {
     const result = await allUser.deleteLinkService(links);
     return res.send(result);
   } catch (error: any) {
-    return InternalServerError(res);
+    if (error.message === "Link não existe") {
+      return res.status(404).json({ error: "Link não existe", message: "O link fornecido não existe." });
+    } else {
+      return InternalServerError(res);
+    }
   }
 }
 async function updateLinkController(req: Request, res: Response) {
@@ -51,7 +60,11 @@ async function updateLinkController(req: Request, res: Response) {
     const result = await allUser.updateLinkService(userId, editMetaDados);
     return res.send(result);
   } catch (error: any) {
-    return InternalServerError(res);
+    if (error.message === "Link não existe") {
+      return res.status(404).json({ error: "Link não existe", message: "O link fornecido não existe." });
+    } else {
+      return InternalServerError(res);
+    }
   }
 }
 export { linkController, createLinkController, deleteLinkController, updateLinkController };

@@ -1,4 +1,4 @@
-import { Router } from "express";
+import { Request, Response, Router } from "express";
 import {
   signinController,
   signupController,
@@ -6,6 +6,8 @@ import {
 
 const userRouter = Router();
 userRouter
+
   .post("/signin", signinController)
-  .post("/signup", signupController);
+  .post("/signup", signupController)
+
 export default userRouter;

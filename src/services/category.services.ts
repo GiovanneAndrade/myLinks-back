@@ -20,31 +20,30 @@ async function consultCategoryService(userId: string) {
     return newData;
 }
 
-async function createCategoryService(
-    name: string,
-    userId: string,
-    linkId: any
-) {
-    const catetogy = await allCategories.createCategoryRepository(
-        name,
-        userId,
-        linkId
-    );
+async function createCategoryService( name: string, userId: string, linkId: any) {
 
-    return catetogy;
+  for (let i = 0; i < linkId.length; i++) {
+    const consultLinkId = await allCategories.consultLinkToMeta(Number(linkId[i].id))
+    if(consultLinkId.length ===0)  throw new Error("Link não existe");
+  } 
+
+  const catetogy = await allCategories.createCategoryRepository(
+    name,
+    userId,
+    linkId
+  );
+
+
+  return catetogy;
 }
 
-async function updateCategoryService(
-    listsId: any,
-    linkId: any,
-    userId: string
-) {
-    for (let i = 0; i < listsId.length; i++) {
-        const catetogy = await allCategories.updateCategoryRepository(
-            listsId[i].listId,
-            linkId
-        );
-    }
+async function updateCategoryService(listsId: any, linkId: any, userId: string) {
+  for (let i = 0; i < listsId.length; i++) {
+    const catetogy = await allCategories.updateCategoryRepository(
+      listsId[i].listId,
+      linkId
+    );
+  }
 
     return await allCategories.consultCategoryRepository(userId);
 }
