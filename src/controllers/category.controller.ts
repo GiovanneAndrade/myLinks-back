@@ -1,8 +1,7 @@
 import { Request, Response } from "express";
 import * as allCategories from "../services";
-import bcrypt from "bcrypt";
-import { ifNotFoundError, InternalServerError } from "../erros/erros";
-import metaFetcher from "meta-fetcher";
+import { InternalServerError } from "../erros/erros";
+
 
 async function consultCategoryController(req: Request, res: Response) {
   const userId = req.user.userId;
