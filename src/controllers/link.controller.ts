@@ -1,8 +1,6 @@
 import { Request, Response } from "express";
 import * as allUser from "../services";
-import bcrypt from "bcrypt";
-import { ifNotFoundError, InternalServerError } from "../erros/erros";
-import metaFetcher from "meta-fetcher";
+import { InternalServerError } from "../erros/erros";
 import { Links, MetaDados } from "../protocols";
 
 async function linkController(req: Request, res: Response) {
