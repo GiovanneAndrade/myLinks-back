@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-import * as allCategories from "../services";
-import { InternalServerError } from "../erros/erros";
+import * as allCategories from "@/services";
+import { InternalServerError } from "@/erros/erros";
 
 
 async function consultCategoryController(req: Request, res: Response) {

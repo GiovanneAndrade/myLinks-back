@@ -1,5 +1,5 @@
-import { NextFunction, Response } from "express";
-import { ApplicationError } from "../protocols";
+import { Response } from "express";
+import { ApplicationError } from "@/protocols";
 
 export class ApiError extends Error {
   public readonly statusCode: number;
@@ -47,3 +47,9 @@ export function ifNotFoundError(res: Response, error: any) {
 export function ifUnauthoredError(res: Response, error: any) {
   return res.status(401).send({ error: error.name, message: error.message });
 }
+
+
+
+
+
+ 

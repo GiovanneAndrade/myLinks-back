@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import * as allUser from "../services";
+import * as allUser from "@/services";
 import bcrypt from "bcrypt";
 import {
   ifNotFoundError,
