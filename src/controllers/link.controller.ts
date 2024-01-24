@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
-import * as allUser from "../services";
-import { InternalServerError } from "../erros/erros";
-import { Links, MetaDados } from "../protocols";
+import * as allUser from "@/services";
+import { InternalServerError } from "@/erros/erros";
+import { Links, MetaDados } from "@/protocols";
 
 async function linkController(req: Request, res: Response) {
   const userId = req.user.userId;

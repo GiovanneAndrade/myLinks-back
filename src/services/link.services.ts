@@ -1,6 +1,6 @@
 import * as allLinks from "@/repositores";
 import metaFetcher from "meta-fetcher";
-import { Link, Links, MetaDados, PageData } from "@/protocols";
+import { Links, MetaDados, PageData } from "@/protocols";
 
 async function linkService(userId: string) {
   const result = await allLinks.linkRepository(userId);
